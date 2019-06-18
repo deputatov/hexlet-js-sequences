@@ -9,3 +9,18 @@ export const map = (func, elements) => {
 }
 
 export const mirror = elements => map(element => node(getName(element), reverseStr(getValue(element))), elements)
+
+export const map = (func, elements) => {
+    const iter = (items, acc) => {
+      if (isEmpty(items)) {
+        return reverse(acc);
+      }
+      return iter(tail(items), cons(func(head(items)), acc));
+    };
+  
+    return iter(elements, l());
+  };
+  
+  export const mirror = elements => (
+    map(element => node(getName(element), reverseStr(getValue(element))), elements)
+  );
